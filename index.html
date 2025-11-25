@@ -30,13 +30,13 @@
         .profile-pic {
             width: 150px;
             height: 150px;
-            border-radius: 50%; /* Torna a imagem redonda */
+            border-radius: 50%; 
             object-fit: cover;
             margin-bottom: 15px;
-            border: 4px solid #007bff;
+            border: 4px solid #f00a5e;
         }
         .contact-info a {
-            color: #007bff;
+            color: #f00a5e;
             text-decoration: none;
             margin: 0 10px;
         }
@@ -57,9 +57,14 @@
         
         <img class="profile-pic" src="./assets/foto.jpeg" alt="Foto de Perfil">        
         <h1>Lívia Rocha</h1>
-        <h2>XXXXXXXXXXXXXXXXXXXXXXXXX</h2>
-        
-        <p>DESCRICAO</p>
+       <p>
+        Sou estudante de Ciência da Computação e atuo na interseção entre tecnologia, justiça social e direitos humanos. Minha trajetória combina desenvolvimento tecnológico, ativismo feminista e políticas públicas, sempre guiada pelo compromisso de transformar dados em ferramentas úteis para a redução das desigualdades de gênero e raça.
+        <br><br>
+        Tenho experiência com análise de dados, gestão de projetos e inovação para impacto social, tendo colaborado com iniciativas voltadas a juventudes, equidade racial e governança digital. Acredito que tecnologias como IA e análises preditivas só fazem sentido quando utilizadas de forma ética, inclusiva e orientada à cidadania digital.
+        <br><br>
+        Meu objetivo é desenvolver soluções que ampliem o acesso à informação de qualidade, fortaleçam a participação política de mulheres e contribuam para um ecossistema digital mais justo. Busco conectar ciência de dados, diversidade e políticas públicas para produzir conhecimento que apoie a democracia e enfrente desigualdades estruturais.
+        </p>
+
         
         <div class="contact-info">
             <a href="mailto: liviaaraujocontato@gmail.com">E-mail</a> |
@@ -70,13 +75,20 @@
 
     <section class="section" id="projetos">
         <h3>Meu Portfólio</h3>
-        <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.</p>
+        <p> Nesta seção, apresento projetos que sintetizam minha experiência com dados, tecnologia e gênero, incluindo análises, visualizações e aplicações de PLN.</p>
 
         <div class="project-block" style="margin-bottom: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h3>1. Análise de Sentimento em Dados Políticos (PLN e Machine Learning)</h3>
-            <p><strong>Foco:</strong> Python, Processamento de Linguagem Natural (NLP), Machine Learning (Regressão Logística) e Tratamento de Dados.</p>
+            <h3>1. Análise de sentimento em narrativas políticas (PLN e Machine Learning)</h3>
+           <p><strong>Foco:</strong> Python, Processamento de Linguagem Natural (NLP), Machine Learning e curadoria de dados.</p>
+
+            <p>
+            <strong>Contexto:</strong> A desinformação, o discurso de ódio e a polarização impactam diretamente o acesso de mulheres à política. Pensando nisso, desenvolvi um projeto de Análise de Sentimentos que simula o monitoramento de discursos online sobre temas sensíveis — metodologia semelhante à usada por iniciativas como “Elas no Congresso” e observatórios de mídia.
+            </p>
             
-            <p><strong>Desafio e Solução:</strong> Desenvolvi um classificador de sentimentos (Negativo, Positivo, Neutro) a partir de um dataset sintético e desbalanceado, simulando o ambiente de mídias sociais (com emojis e erros de digitação). O projeto demonstra técnicas robustas de pré-processamento, vetorização Tf-idf e avaliação de performance com F1-Score e Matriz de Confusão.</p>
+            <p>
+            <strong>Como foi feito:</strong> Criei um dataset sintético realista com textos positivos, negativos e neutros sobre mulheres na política. A partir disso, desenvolvi um pipeline completo de PLN: higienização textual, tokenização, vetorização Tf-idf, balanceamento e modelo preditivo via Regressão Logística.
+            </p>
+
 
             <div class="project-links" style="margin-top: 15px;">
                 <a href="[LINK PARA O SEU NOTEBOOK NLP NO GITHUB]" target="_blank" style="padding: 10px 15px; background-color: #f00a5e; color: white; text-decoration: none; border-radius: 5px; margin-right: 15px;">
@@ -85,7 +97,7 @@
                 
                 </div>
             
-            <h4 style="margin-top: 20px;">Resultados Visuais (Interpretabilidade)</h4>
+            <h4 style="margin-top: 20px;">Resultados visuais: )</h4>
             <div style="display: flex; justify-content: space-around; margin-top: 10px;">
                 <img src="./assets/wordcloud_positivo.png" alt="Nuvem de Palavras Positivas" style="width: 48%; border: 1px solid #eee;">
                 <img src="./assets/wordcloud_negativo.png" alt="Nuvem de Palavras Negativas" style="width: 48%; border: 1px solid #eee;">
@@ -93,10 +105,16 @@
         </div>
 
         <div class="project-block" style="margin-bottom: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h3>2. Engenharia de Dados e Dashboard de Coletivos Feministas</h3>
-            <p><strong>Foco:</strong> Engenharia de Dados, Limpeza e Pré-processamento com Python, SQL e Visualização de Dados (Looker Studio).</p>
+            <h3>2. Engenharia de dados e dashboard sobre coletivos de meninas e jovens feministas</h3>
+            <p><strong>Foco:</strong> Engenharia de dados, limpeza e pré-processamento em Python, análise exploratória e visualização no Looker Studio.</p>
             
-            <p><strong>Desafio e Solução:</strong> O dataset original possuía inconsistências e dados não estruturados. Utilizei Python (Pandas) para padronizar os nomes, tratar valores nulos e estruturar os dados. O resultado foi exportado para um modelo limpo e visualizado em um Dashboard interativo focado na distribuição geográfica e áreas de atuação dos coletivos.</p>
+            <p>
+            <strong>Contexto:</strong> Dados sobre iniciativas lideradas por meninas e jovens são fundamentais para entender territórios, desigualdades e potenciais de incidência. Inspirada em projetos de jornalismo de dados do AzMina, estruturei um dataset que representa coletivos feministas juvenis do Brasil.
+            </p>
+
+            <p>
+            <strong>O que foi feito:</strong> Realizei o tratamento completo da base: padronização de variáveis, criação de indicadores (escola pública, raça×gênero, LGBTQIA+), correções de inconsistências e geocodificação por estado. Em seguida, construí um dashboard analítico ilustrando padrões regionais, demográficos e educacionais.
+            </p>    
 
             <div class="project-links" style="margin-top: 15px;">
                 <a href="[LINK PARA O SEU NOTEBOOK DE LIMPEZA NO GITHUB]" target="_blank" style="padding: 10px 15px; background-color: #f00a5e; color: white; text-decoration: none; border-radius: 5px;">
