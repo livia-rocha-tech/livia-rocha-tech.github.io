@@ -264,17 +264,27 @@
 
 <!-- ================= ANIMAÇÃO (OBSERVADOR) ================= -->
 <script>
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
+document.addEventListener("DOMContentLoaded", function () {
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    } else {
+        // Fallback: mostra tudo imediatamente
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.classList.add('fade-in-visible');
+        });
+    }
+});
 </script>
+
 
 </body>
 </html>
