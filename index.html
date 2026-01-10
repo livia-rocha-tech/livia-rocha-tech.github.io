@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lívia Rocha | Portfólio em Dados, Gênero e Tecnologia</title>
 
-    <!-- Fonte moderna -->
+    <!-- Fonte -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
+        /* ---------------------- BASE ---------------------- */
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.7;
@@ -16,49 +17,94 @@
             padding: 0;
             background: #f7f3f5;
             color: #333;
+            position: relative;
         }
 
-        /* ---------------------- MENU SUPERIOR FIXO ---------------------- */
-        .top-menu {
-            /* position: fixed; */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(600px at 10% 10%, rgba(240,10,94,0.08), transparent 60%),
+                radial-gradient(500px at 90% 30%, rgba(255,180,210,0.15), transparent 60%),
+                radial-gradient(400px at 50% 90%, rgba(240,10,94,0.06), transparent 60%);
+            z-index: -2;
+        }
+
+        /* ---------------------- CURSOR GLOW ---------------------- */
+        .cursor-glow {
+            position: fixed;
             top: 0;
             left: 0;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(
+                circle,
+                rgba(240,10,94,0.18) 0%,
+                rgba(240,10,94,0.08) 35%,
+                transparent 65%
+            );
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            z-index: -1;
+        }
+
+        /* ---------------------- MENU ---------------------- */
+        .top-menu {
             width: 100%;
-            background: #ffffffee;
+            background: rgba(255,255,255,0.8);
             backdrop-filter: blur(8px);
             border-bottom: 2px solid #ffd7e5;
             padding: 12px 20px;
             display: flex;
             justify-content: center;
             gap: 40px;
-            z-index: 999;
         }
 
         .top-menu a {
             color: #f00a5e;
             font-weight: 600;
             text-decoration: none;
-            transition: 0.2s;
+            position: relative;
         }
 
-        .top-menu a:hover {
-            color: #b30847;
+        .top-menu a::after {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 0 rgba(240,10,94,0.25);
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .top-menu a:hover::after {
+            opacity: 1;
+            box-shadow: 0 0 0 6px rgba(240,10,94,0.12);
         }
 
         /* ---------------------- CONTAINER ---------------------- */
         .container {
             max-width: 950px;
-            margin: 120px auto 40px auto; /* margem maior por causa do menu fixo */
-            background: #fff;
+            margin: 80px auto 40px;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.07);
+            position: relative;
+            z-index: 1;
         }
 
+        /* ---------------------- HEADER ---------------------- */
         .header {
             text-align: center;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #ffd7e5;
+            padding: 35px 30px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,215,229,0.6);
+            box-shadow: 0 10px 30px rgba(240,10,94,0.08);
         }
 
         .profile-pic {
@@ -75,7 +121,6 @@
             font-size: 2.4rem;
             font-weight: 800;
             margin: 10px 0 5px;
-            color: #222;
         }
 
         h3 {
@@ -92,21 +137,95 @@
 
         /* ---------------------- SEÇÕES ---------------------- */
         .section {
-            margin-top: 50px;
+            margin-top: 60px;
             padding-top: 15px;
             border-top: 2px solid #ffd7e5;
         }
 
-        .project-block {
-            margin-bottom: 40px;
-            padding: 25px;
-            background: #fff7fc;
-            border: 1px solid #f7c5da;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.04);
+        /* ---------------------- ATUAÇÃO EM DADOS ---------------------- */
+        .data-card {
+            perspective: 1000px;
+            padding: 0;
+            background: none;
+            border: none;
+            margin-bottom: 20px;
+
+
         }
 
-        /* ---------------------- ANIMAÇÃO FADE IN ---------------------- */
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 60px;
+            border-radius: 14px;
+            transition: transform 0.9s ease-in-out;
+            transform-style: preserve-3d;
+         
+        }
+
+        .data-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(247,197,218,0.7);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            
+        }
+
+        .card-front h4 {
+            color: #b30847;
+            font-weight: 700;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+
+
+        /* ---------------------- CURRÍCULO ---------------------- */
+        .cv-block {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid rgba(247,197,218,0.7);
+            margin-bottom: 30px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cv-block:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(240,10,94,0.18);
+        }
+
+        .experience-title {
+            font-weight: 700;
+            color: #b30847;
+        }
+
+        /* ---------------------- ANIMAÇÃO ---------------------- */
         .fade-in {
             opacity: 0;
             transform: translateY(18px);
@@ -118,175 +237,421 @@
             transform: translateY(0);
         }
 
-        /* ---------------------- CURRÍCULO ---------------------- */
-        .cv-block {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #f7c5da;
-            margin-bottom: 40px;
-        }
-
-        .experience-title {
-            font-weight: 700;
-            margin-top: 15px;
-            color: #b30847;
-        }
-
         footer {
             text-align: center;
             margin-top: 60px;
             color: #777;
             font-size: 0.85rem;
         }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .skill-tag {
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(240,10,94,0.08);
+            border: 1px solid rgba(240,10,94,0.25);
+            color: #b30847;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(240,10,94,0.2);
+        }
+
+        /* ---------------------- QUEM EU SOU ---------------------- */
+        .about-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .about-text,
+        .carousel-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+       .about-text p {
+            text-align: justify;
+        }
+
+
+        /* ---------------------- CARROSSEL ---------------------- */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            transition: transform 0.4s ease;
+        }
+
+        .carousel-item {
+            min-width: 260px;
+            height: 170px;
+            border-radius: 18px;
+            background: rgba(240,10,94,0.08);
+            border: 1px solid rgba(240,10,94,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b30847;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+
+        /* Setas */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(240,10,94,0.25);
+            color: #b30847;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(240,10,94,0.1);
+        }
+
+        .carousel-btn.prev {
+            left: -10px;
+        }
+
+        .carousel-btn.next {
+            right: -10px;
+        }
+
+
     </style>
 </head>
 
 <body>
 
-<!-- MENU SUPERIOR FIXO -->
+<div class="cursor-glow"></div>
+
 <nav class="top-menu">
     <a href="#inicio">Início</a>
-    <a href="#projetos">Portfólio</a>
+    <a href="#atuacao-dados">Atuação</a>
     <a href="#curriculo">Currículo</a>
 </nav>
 
 <div class="container" id="inicio">
 
-
     <header class="header fade-in">
         <img class="profile-pic" src="./assets/foto.jpeg" alt="Foto de Perfil">
-
         <h1>Lívia Rocha</h1>
 
         <p>
-        Sou estudante de Ciência da Computação e atuo na interseção entre tecnologia, justiça social e direitos humanos. Minha trajetória combina desenvolvimento tecnológico, ativismo feminista e políticas públicas, sempre guiada pelo compromisso de transformar dados em ferramentas úteis para a redução das desigualdades de gênero e raça.
-        <br><br>
-        Tenho experiência com análise de dados, gestão de projetos e inovação para impacto social, tendo colaborado com iniciativas voltadas a juventudes, equidade racial e governança digital. Acredito que tecnologias como IA e análises preditivas só fazem sentido quando utilizadas de forma ética, inclusiva e orientada à cidadania digital.
-        <br><br>
-        Meu objetivo é desenvolver soluções que ampliem o acesso à informação de qualidade, fortaleçam a participação política de mulheres e contribuam para um ecossistema digital mais justo. Busco conectar ciência de dados, diversidade e políticas públicas para produzir conhecimento que apoie a democracia e enfrente desigualdades estruturais.
+            Profissional em Ciência da Computação e atuo na interseção entre tecnologia,
+            justiça social e direitos humanos. Minha trajetória combina desenvolvimento
+            tecnológico e ativismo feminista.
         </p>
 
         <div class="contact-info">
             <a href="mailto:liviaaraujocontato@gmail.com">E-mail</a> |
-            <a href="https://www.linkedin.com/in/liviarocha-tech/" target="_blank">LinkedIn</a> |
-            <a href="https://github.com/livia-rocha-tech" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/liviarocha-tech/" target="_blank">LinkedIn</a> 
         </div>
     </header>
 
-    <!-- ====================== PORTFÓLIO ====================== -->
-    <section class="section fade-in" id="projetos">
-        <h3>Meu Portfólio</h3>
-        <p>Apresento projetos que sintetizam minha experiência com dados, tecnologia e gênero, explorando análises, visualizações e aplicações de PLN.</p>
+    <section class="section fade-in" id="quem-eu-sou">
+        <h3>Sobre mim</h3>
 
-        <!-- PROJETO 1 -->
-        <div class="project-block fade-in">
-            <h3>1. Análise de sentimento em narrativas políticas (PLN e Machine Learning)</h3>
+        <div class="about-wrapper">
+            <div class="about-text">
+                <p>
+                    Sou profissional de tecnologia com atuação no terceiro setor e compromisso com as agendas de gênero, direitos humanos e justiça social. Participo de espaços de debate público voltados ao enfrentamento da violência de gênero, da misoginia facilitada pela tecnologia e à proteção de populações vulnerabilizadas, especialmente mulheres, crianças e adolescentes.
+                    <br><br>
+                    Minha atuação em dados e tecnologia é orientada por esse percurso. Assim, trabalho com análise e sistematização de dados como ferramentas para compreender desigualdades, apoiar o debate público e fortalecer estratégias de incidência e políticas públicas. Tenho interesse em governança e regulação tecnológica, vieses em sistemas de inteligência artificial e nos impactos sociais das tecnologias digitais, sempre a partir de uma abordagem crítica e responsável.
+                </p>
+            </div>
 
-            <p><strong>Foco:</strong> Python, Processamento de Linguagem Natural (NLP), Machine Learning e curadoria de dados.</p>
+            <div class="carousel-container">
+                <button class="carousel-btn prev">&#8249;</button>
 
-            <p><strong>Contexto:</strong>A desinformação, o discurso de ódio e a polarização impactam diretamente o acesso de mulheres à política. Pensando nisso, desenvolvi um projeto de Análise de Sentimentos que simula o monitoramento de discursos online sobre temas sensíveis.</p>
+                <div class="carousel-track">
+                    <div class="carousel-item">Imagem 1</div>
+                    <div class="carousel-item">Imagem 2</div>
+                    <div class="carousel-item">Imagem 3</div>
+                    <div class="carousel-item">Imagem 4</div>
+                    <div class="carousel-item">Imagem 5</div>
+                    <div class="carousel-item">Imagem 6</div>
+                    <div class="carousel-item">Imagem 7</div>
+                    <div class="carousel-item">Imagem 8</div>
+                </div>
 
-            <p><strong>Como foi feito:</strong> Criação de um dataset sintético realista com textos positivos, negativos e neutros sobre mulheres na política. A partir disso, desenvolvi um pipeline completo de PLN: higienização textual, tokenização, vetorização Tf-idf, balanceamento e modelo preditivo via Regressão Logística.</p>
+                <button class="carousel-btn next">&#8250;</button>
+            </div>
+        </div>
+    </section>
 
-            </a>
-                <a href="https://colab.research.google.com/drive/1cxEshPRpr7gMer_2boJFZfzhCTc5aYVK?usp=sharing" target="_blank" style="padding: 10px 15px; background-color: #f00a5e; color: white; text-decoration: none; border-radius: 5px;">
-                    Ver código Python
-                </a>
+    <section class="section fade-in" id="atuacao-dados">
+        <h3>Minha atuação em dados</h3>
 
-            <h4 style="margin-top: 20px;">Resultados visuais</h4>
-            <div style="display: flex; gap: 20px; margin-top: 10px;">
-                <img src="./assets/wordcloud_positivo.png" style="width: 48%; border-radius: 8px;">
-                <img src="./assets/wordcloud_negativo.png" style="width: 48%; border-radius: 8px;">
+        <div class="data-card">
+            <div class="card-inner">
+                <div class="card-front">
+                     <h4>Ciclo de dados e qualidade da informação</h4>
+                </div>
+                <div class="card-back">
+                    <p>
+                        Trabalho com dados de ponta a ponta, desde a coleta em bases públicas até
+                        a organização e o tratamento das informações.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <!-- PROJETO 2 -->
-        <div class="project-block fade-in">
-            <h3>2. Engenharia de dados e dashboard sobre coletivos de meninas e jovens feministas</h3>
-
-            <p><strong>Foco:</strong> Python, limpeza de dados, análise exploratória e Looker Studio.</p>
-
-            <p><strong>Contexto:</strong> Dados sobre iniciativas lideradas por meninas e jovens são fundamentais para entender territórios, desigualdades e potenciais de incidência.</p>
-
-            <p><strong>O que foi feito:</strong> Realização de tratamento completo da base: padronização de variáveis, criação de indicadores, correções de inconsistências e geocodificação por estado. Em seguida, construí um dashboard analítico ilustrando padrões regionais, demográficos e educacionais.</p>
-            <h4 style="margin-top: 20px;">Dashboard</h4>
-            <iframe width="800" height="550" src="https://lookerstudio.google.com/embed/reporting/872ce852-e84c-46bc-b201-2a3a1e67609c/page/nhBgF"></iframe>
+        <div class="data-card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h4>Monitoramento e gestão de bases de dados</h4>
+                </div>
+                <div class="card-back">
+                    <p>
+                        Trabalho com a atualização contínua e manutenção de bases já estruturadas, com foco em monitoramento, organização de fluxos e documentação de processos.
+                    </p>
+                </div>
+            </div>
         </div>
 
+        <div class="data-card">
+            <div class="card-inner">
+                <div class="card-front">
+                <h4>Visualização e comunicação de resultados</h4>
+                </div>
+                <div class="card-back">
+                <p>
+                    Produzo dashboards, relatórios analíticos e visualizações voltadas tanto para públicos técnicos quanto não técnicos.
+                </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="card-inner">
+                <div class="card-front">
+                <h4>Indicadores sociais e análise interseccional</h4>
+                </div>
+                <div class="card-back">
+                <p>
+                    Construo e analiso de indicadores voltados ao monitoramento de impacto social, com atenção a recortes de gênero, raça, território e juventude.
+                </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="card-inner">
+                <div class="card-front">
+                <h4>Análise textual e dados qualitativos</h4>
+                </div>
+                <div class="card-back">
+                <p>
+                    Aplico técnicas de Processamento de Linguagem Natural para análise de textos, documentos e dados qualitativos.
+                </p>
+                </div>
+            </div>
+        </div>
+        
     </section>
 
-    <!-- ====================== CURRÍCULO ====================== -->
     <section class="section fade-in" id="curriculo">
         <h3>Currículo</h3>
 
-       <div class="cv-block fade-in">
-        <h4 class="experience-title">Girl Up Brasil (parceria com UNICEF Brasil) — Assistente de Projetos</h4>
-        <p><em>Novembro de 2024 — Junho de 2025 • Remoto</em></p>
+        <div class="cv-block">
+            <h4 class="experience-title">Girl Up Brasil — Assistente de Projetos</h4>
+            <p><em>Novembro de 2024 — Dezembro de 2025 • Remoto</em></p>
 
-        <ul>
-            <li>Atuação na gestão de projetos voltados à promoção dos direitos de meninas, crianças e adolescentes, com foco em equidade de gênero e raça.</li>
-            <li>Apoio à coordenação de iniciativas interinstitucionais que fortalecem ecossistemas de juventude e lideranças femininas e negras, em parceria com o UNICEF Brasil.</li>
-            <li>Responsável pela sistematização e análise de dados sobre participação, engajamento e diversidade em programas voltados a meninas e adolescentes em diferentes territórios.</li>
-            <li>Elaboração de relatórios executivos e narrativas estratégicas alinhadas à agenda climática e ao fortalecimento da presença de adolescentes em espaços de decisão.</li>
-        </ul>
-    </div>
+            <ul>
+                <li>Atuação na gestão de projetos voltados à promoção dos direitos de meninas, crianças e adolescentes, com foco em equidade territorial, de gênero e raça.</li>
+                <li>Apoio à coordenação de iniciativas interinstitucionais que fortalecem ecossistemas de juventude, em parceria com o UNICEF Brasil.</li>
+                <li>Responsável pela sistematização e análise de dados sobre participação, engajamento e diversidade em programas voltados a lideranças adolescentes em diferentes territórios.</li>
+                <li>Elaboração de relatórios executivos.</li>
+            </ul>
+        </div>
 
-    <!-- EXPERIÊNCIA 2 -->
-    <div class="cv-block fade-in">
-        <h4 class="experience-title">Girl Up Brasil — Líder Regional </h4>
-        <p><em>Brasil, remoto</em></p>
+        <div class="cv-block">
+            <h4 class="experience-title">Girl Up Brasil — Líder Regional</h4>
+            <p><em>Abril de 2023 — Novembro de 2024 • Remoto</em></p>
 
-        <ul>
-            <li>Coordenação regional de estratégias de engajamento e fortalecimento de lideranças femininas e negras em iniciativas de impacto social.</li>
-            <li>Análise de dados e monitoramento de KPIs relacionados à equidade de gênero, representatividade racial e desempenho de programas juvenis.</li>
-            <li>Produção de relatórios e dashboards para orientar decisões estratégicas e comunicar resultados de forma acessível e baseada em evidências.</li>
-            <li>Implementação de soluções automatizadas em JavaScript para otimizar fluxos de dados e ampliar o alcance das ações da rede.</li>
-            <li>Criação de novas pontes entre comunidades locais e a rede global da Girl Up, elevando em 70% os índices de engajamento e pertencimento.</li>
-        </ul>
-    </div>
-        <div class="cv-block fade-in">
+            <ul>
+                <li>Coordenação de estratégias de engajamento e fortalecimento de uma rede de meninas ativistas por todo o país.</li>
+                <li>Análise de dados e monitoramento de KPIs relacionados à equidade de gênero, representatividade racial e desempenho de programas juvenis.</li>
+                <li>Produção de relatórios e dashboards para orientar decisões estratégicas e comunicar resultados de forma acessível e baseada em evidências.</li>
+                <li>Implementação de soluções automatizadas em JavaScript para otimizar fluxos de dados e ampliar o alcance das ações da rede.</li>
+                <li>Criação de novas pontes entre comunidades locais e a rede global da Girl Up, elevando em 70% os índices de engajamento e pertencimento.</li>
+            </ul>
+        </div>
+
+        <div class="cv-block">
             <h4 class="experience-title">Educação</h4>
-            <p><strong>Universidade Estadual do Sudoeste da Bahia</strong> — Ciência da Computação (7/8)</p>
+            <p>
+                <strong>Universidade Estadual do Sudoeste da Bahia</strong> — 
+                Bacharelado em Ciência da Computação
+            </p>
         </div>
 
-        <div class="cv-block fade-in">
-            <h4 class="experience-title">Habilidades</h4>
-            <p>Java, C++ , Python, JavaScript, SQL, PostgreSQL, SQLServer, MySQL, Pandas, NumPy, Matplotlib, Seaborn, Git, GitHub, Power BI, Google Data Studio (Looker Studio), Figma, Slack, Excel, PowerPoint, Trello, Asana, Monday, Miro, Notion, Typeform, Google Workspace.</p>
+        <div class="cv-block">
+        <h4 class="experience-title">Certificações</h4>
+        <ul>
+            <li>
+                <strong>Análise de Dados com Python</strong> — PrograMaria <br>
+                <em>20h • 2024</em>
+            </li>
+            <li>
+                <strong>Ciência de Dados</strong> — FGV EMAp<br>
+                <em>60h • 2025</em>
+            </li>
+            <li>
+                <strong>Análise de Dados em Linguagem R</strong> — EV.G <br>
+                <em>20h • 2025</em>
+            </li>
+        </ul>
+    </div>
+
+    <div class="cv-block">
+        <h4 class="experience-title">Habilidades e ferramentas</h4>
+
+        <p><strong>Linguagens de programação</strong></p>
+        <div class="skill-tags">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">R</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">SQL</span>
         </div>
 
+        <p><strong>Bancos de dados</strong></p>
+        <div class="skill-tags">
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">MySQL</span>
+        </div>
+
+        <p><strong>Análise e visualização de dados</strong></p>
+        <div class="skill-tags">
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Seaborn</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Looker</span>
+        </div>
+
+        <p><strong>Ferramentas de desenvolvimento</strong></p>
+        <div class="skill-tags">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+        </div>
+
+        <p><strong>Gestão, colaboração e produtividade</strong></p>
+        <div class="skill-tags">
+            <span class="skill-tag">Slack</span>
+            <span class="skill-tag">Trello</span>
+            <span class="skill-tag">Asana</span>
+            <span class="skill-tag">Monday</span>
+            <span class="skill-tag">Miro</span>
+            <span class="skill-tag">Notion</span>
+            <span class="skill-tag">Typeform</span>
+            <span class="skill-tag">Google Workspace</span>
+            <span class="skill-tag">Excel</span>
+        </div>
+    </div>
     </section>
 
     <footer>
-        © 2025 Lívia Rocha — Construído com GitHub Pages.
+        © 2025 Lívia Rocha — GitHub Pages
     </footer>
-
 </div>
 
-<!-- ================= ANIMAÇÃO (OBSERVADOR) ================= -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    } else {
-        // Fallback: mostra tudo imediatamente
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.classList.add('fade-in-visible');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-visible');
+                observer.unobserve(entry.target);
+            }
         });
-    }
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const cursor = document.querySelector('.cursor-glow');
+
+    document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        cursor.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+    });
+
+    // ---------------------- CARROSSEL ----------------------
+    const track = document.querySelector('.carousel-track');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+
+    let position = 0;
+    const itemWidth = 276; // largura + gap aproximado
+    const maxScroll = track.children.length * itemWidth - track.parentElement.offsetWidth;
+
+    nextBtn.addEventListener('click', () => {
+        position -= itemWidth;
+        if (Math.abs(position) > maxScroll) {
+            position = 0;
+        }
+        track.style.transform = `translateX(${position}px)`;
+    });
+
+    prevBtn.addEventListener('click', () => {
+        position += itemWidth;
+        if (position > 0) {
+            position = -maxScroll;
+        }
+        track.style.transform = `translateX(${position}px)`;
+    });
+
+    document.querySelectorAll('.data-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.querySelector('.card-inner').classList.toggle('is-flipped');
+        });
+    });
+
+
 });
 </script>
 
-
 </body>
 </html>
+
+
 
